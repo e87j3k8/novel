@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+	<sqlMapConfig>
+		<settings
+			classInfoCacheEnabled="true"
+			lazyLoadingEnabled="false"
+			cacheModelsEnabled="true"
+			enhancementEnabled="true"
+			errorTracingEnabled="false"
+			useStatementNamespaces="true"
+			maxSessions="384"
+			maxTransactions="128"
+			maxRequests="1024"
+			useColumnLabel="true"
+			statementCachingEnabled="true"
+			defaultStatementTimeout="25000"
+		/>
+
+		<typeAlias alias="int" type="java.lang.Integer"/>
+		<typeAlias alias="long" type="java.lang.Long"/>
+		<typeAlias alias="boolean" type="java.lang.Boolean"/>
+		<typeAlias alias="string" type="java.lang.String"/>
+		<typeAlias alias="date" type="java.util.Date"/>
+		<typeAlias alias="hashMap" type="java.util.HashMap"/>
+		
+		<typeAlias alias="userVo" type="com.project.novel.vo.UserVo" />
+
+		<sqlMap resource="/sql/user.xml" />
+</sqlMapConfig>
