@@ -3,19 +3,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <header id="header">
-	<div class="topBar_wrap">
-		<div class="topBar">
-			<div class="menu">
-				<a href="www.joara.com" title="joara.com" class="bookmark">즐겨찾기</a><a href="https://play.google.com/store/apps/details?id=com.joara.mobile" target="_blank" class="app">조아라 앱 다운로드</a>
-			</div>
-			<div class="info">
-				<a href="/cs/event/">이벤트</a>
-				<span class="line">|</span>
-				<a href="/member/get_mana.html">딱지/마나모으기</a>
-				<a href="https://www.joara.com/login.html" class="btn_img"><img src="//cdn.joara.com/images/common/btn/btn_top_login.gif" alt="로그인"></a>
-			</div>
-		</div>
-	</div>
 	<div style="width:990px; margin:0 auto; overflow:hidden; position:relative">
 		<style>
 			.webtoon_logo{float:left;margin-top:32px}
@@ -63,5 +50,24 @@
 			<img src="http://banner.joara.com/banner/bannerView.inc.php?idx=1708" style="display:none">
 			</div>
 		</div>
+	</div>
+	<div class="">
+		<ul>
+			<li>
+				<a href="/products/all">
+					<span>전체작품</span>
+				</a>
+			</li>
+			<li>
+				<a href="/products/genre">
+					<span>작품장르별</span>
+				</a>
+			</li>
+			<li>
+				<a href="/products/ranking">
+					<span>작품랭킹별</span>
+				</a>
+			</li>
+		</ul>
 	</div>
 </header>
