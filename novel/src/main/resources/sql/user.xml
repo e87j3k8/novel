@@ -3,6 +3,11 @@
 
 <sqlMap namespace="user">
 	<select id="user.getUser" parameterClass="userVo" resultClass="userVo">
-		select * from tb_user tu where id = #id#;
+		select
+			id,
+			nick,
+			regDt
+		from tb_user tu
+		where id = #id#
 	</select>
 </sqlMap>

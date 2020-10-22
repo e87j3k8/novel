@@ -35,5 +35,4 @@ public class HomeController {
 		mav.setViewName("/index.bs");
 		return mav;
 	}
-	
 }

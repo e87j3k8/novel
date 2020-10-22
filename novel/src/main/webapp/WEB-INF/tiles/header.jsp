@@ -51,7 +51,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="">
+	<div class="category">
 		<ul>
 			<li>
 				<a href="/products/all">

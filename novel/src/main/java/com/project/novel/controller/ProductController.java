@@ -17,6 +17,7 @@ public class ProductController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+	@RequestMapping("/all")
 	public ModelAndView productAll(HttpServletResponse response, HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		ResponseVo res = new ResponseVo();
@@ -27,6 +28,7 @@ public class ProductController {
 			logger.error(e.getMessage());
 		}
 		mav.addObject("res", res);
+		mav.setViewName("");
 		return mav;
 	}
 	
