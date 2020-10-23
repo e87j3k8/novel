@@ -1,5 +1,9 @@
 package com.project.novel.dao.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.project.novel.dao.NovelDao;
@@ -7,21 +11,15 @@ import com.project.novel.vo.NovelVo;
 
 @Repository("novelDao")
 public class NovelDaoImpl implements NovelDao {
+	@Autowired SqlMapClientTemplate sqlMapClientTemplate;
 	
 	@Override
-	public NovelVo novelListAll(NovelVo vo) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<NovelVo> novelListAll(NovelVo vo) {
+		return (List<NovelVo>)sqlMapClientTemplate.queryForList("novel.getProductList",vo);
 	}
 	
 	@Override
-	public NovelVo novelListGenre(NovelVo vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
-	public NovelVo novelListRanking(NovelVo vo) {
+	public List<NovelVo> novelListRanking(NovelVo vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}

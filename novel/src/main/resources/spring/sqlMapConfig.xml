@@ -17,7 +17,7 @@
 			statementCachingEnabled="true"
 			defaultStatementTimeout="25000"
 		/>
-
+		
 		<typeAlias alias="int" type="java.lang.Integer"/>
 		<typeAlias alias="long" type="java.lang.Long"/>
 		<typeAlias alias="boolean" type="java.lang.Boolean"/>
@@ -26,6 +26,10 @@
 		<typeAlias alias="hashMap" type="java.util.HashMap"/>
 		
 		<typeAlias alias="userVo" type="com.project.novel.vo.UserVo" />
-
+		<typeAlias alias="itemsVo" type="com.project.novel.vo.ItemsVo" />
+		<typeAlias alias="novelVo" type="com.project.novel.vo.NovelVo" />
+		
 		<sqlMap resource="/sql/user.xml" />
+		<sqlMap resource="/sql/novel.xml" />
+		<sqlMap resource="/sql/items.xml" />
 </sqlMapConfig>

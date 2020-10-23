@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="novel">
+	<!-- 작품 목록 -->
+	<select id="novel.getProductList" resultClass="novelVo">
+		select
+			tn.id as novelId,
+			tu.nick as nick,
+			tn.title as title,
+			(select tg.genreNm from tb_genrecode tg where tg.id=tn.genre1) as genre,
+			ifnull((select tg.genreNm from tb_genrecode tg where tg.id=tn.genre2),'') as genre2,
+			sum(a.`view`) as viewAll,
+			date_format(ti.regDt,'%Y-%m/%d %h:%i') as regDt
+		from tb_novel tn
+		inner join tb_user tu on tn.author = tu.id
+		inner join tb_items ti on tn.id=ti.novelId
+		inner join (
+			select
+				tv.itemId,
+				count(tv.itemId) as `view`
+			from tb_view tv
+			group by itemId
+		) a
+		on ti.id = a.itemId
+		where 1=1
+		<isEmpty prepend="and" property="id">
+		tn.id = id
+		</isEmpty>
+		<isNotEmpty prepend="and" property="genre">
+		(tn.genre1 =2 or tn.genre2 =2)
+		</isNotEmpty>
+		group by tn.id
+	</select>
+</sqlMap>

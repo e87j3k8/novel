@@ -9,6 +9,7 @@ public class NovelVo extends UserVo{
 	private long like;
 	private long dislike;
 	private long viewAll;
+	private String regDt;
 	
 	public long getNovelId() {
 		return novelId;
@@ -57,6 +58,12 @@ public class NovelVo extends UserVo{
 	}
 	public void setViewAll(long viewAll) {
 		this.viewAll = viewAll;
+	}
+	public String getRegDt() {
+		return regDt;
+	}
+	public void setRegDt(String regDt) {
+		this.regDt = regDt;
 	}
 	
 	

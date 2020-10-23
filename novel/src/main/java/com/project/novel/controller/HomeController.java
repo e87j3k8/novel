@@ -26,7 +26,7 @@ public class HomeController {
 	
 	@RequestMapping(value = { "", "/", "/index" })
 	public ModelAndView index(HttpServletResponse response, HttpServletRequest request) throws Exception {
-		String pqgeUrl = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		String pageUrl = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 		ModelAndView mav = new ModelAndView();
 		UserVo vo = new UserVo();
 		vo.setId(1);
