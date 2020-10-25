@@ -1,0 +1,12 @@
+/* ranking Top */
+#rankingTop { width: 33%; border: 1px solid #e1e1e1; padding: 10px; }
+#rankingTop ul li {}
+#rankingTop ul li a { display: inline-block; width: 100%; }
+#rankingTop ul li a:after { display: block; content: ''; clear: both; }
+#rankingTop ul li a > div { float: left; height: 40px; line-height: 40px; }
+#rankingTop ul li a .idx { width: 50px; font-size: 1.4em; }
+#rankingTop ul li a .idx span:first-of-type { color: red; }
+#rankingTop ul li a .title {
+	width: calc( 100% - 50px );
+	text-overflow: ellipsis; overflow: hidden; white-space: nowrap;
+}

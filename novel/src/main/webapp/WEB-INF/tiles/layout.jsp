@@ -8,11 +8,15 @@
 <meta charset="UTF-8">
 <title>웹노블</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/common.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+<script src="/resources/js/handlebars.custom.js"></script>
 </head>
-
 <body>
 	<t:insertAttribute name="header" />
-	<t:insertAttribute name="body" />
+	<div id="content">
+		<t:insertAttribute name="body" />
+	</div>
 	<t:insertAttribute name="footer" />
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.project.novel.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,10 @@ public class NovelDaoImpl implements NovelDao {
 	public List<NovelVo> novelListRanking(NovelVo vo) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public List<NovelVo> novelListRanking(HashMap<String, Integer> map) {
+		return (List<NovelVo>)sqlMapClientTemplate.queryForList("novel.rankingTop",map);
 	}
 }
