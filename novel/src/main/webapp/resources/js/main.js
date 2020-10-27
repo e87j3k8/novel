@@ -7,7 +7,7 @@ $(function(){
 			url: '/rankngtop',
 			type: 'GET',
 			success: function (data) {
-				if(data.code==200){
+				if(data.code===200){
 					const rankingTemplate = $('#rankingTopTemplate').html();
 					const template = Handlebars.compile(rankingTemplate);
 					$('#rankingTop').html(template(data));

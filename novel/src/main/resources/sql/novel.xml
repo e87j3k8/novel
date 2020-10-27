@@ -10,6 +10,8 @@
 			tn.title as title,
 			(select tg.genreNm from tb_genrecode tg where tg.id=tn.genre1) as genre,
 			ifnull((select tg.genreNm from tb_genrecode tg where tg.id=tn.genre2),'') as genre2,
+			ifnull((select count(*) from tb_recommend tr where tr.novelId = tn.id and tr.status = 0),0) as `like`,
+			ifnull((select count(*) from tb_recommend tr2 where tr2.novelId = tn.id and tr2.status =1) ,0) as dislike,
 			ifnull(sum(a.`view`),0) as viewAll,
 			date_format(ti.regDt,'%Y-%m/%d %h:%i') as regDt,
 			if(date_format(ti.regDt,'%Y-%m/%d %h:%i') between date_format(date_sub(now(), INTERVAL 1 day) ,'%Y-%m/%d %h:%i') and date_format(now(),'%Y-%m/%d %h:%i'),true,false) as isNew
