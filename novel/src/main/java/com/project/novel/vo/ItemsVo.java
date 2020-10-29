@@ -2,9 +2,8 @@ package com.project.novel.vo;
 
 import java.util.Date;
 
-public class ItemsVo {
+public class ItemsVo extends NovelVo {
 	private long itemId;
-	private long novelId;
 	private String subtitle;
 	private String content;
 	private Date regDate;
@@ -13,12 +12,6 @@ public class ItemsVo {
 	}
 	public void setItemId(long itemId) {
 		this.itemId = itemId;
-	}
-	public long getNovelId() {
-		return novelId;
-	}
-	public void setNovelId(long novelId) {
-		this.novelId = novelId;
 	}
 	public String getSubtitle() {
 		return subtitle;
