@@ -6,7 +6,8 @@ public class ItemsVo extends NovelVo {
 	private long itemId;
 	private String subtitle;
 	private String content;
-	private Date regDate;
+	private String regDate;
+	private long view;
 	public long getItemId() {
 		return itemId;
 	}
@@ -25,10 +26,17 @@ public class ItemsVo extends NovelVo {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getRegDate() {
+	public String getRegDate() {
 		return regDate;
 	}
-	public void setRegDate(Date regDate) {
+	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
+	public long getView() {
+		return view;
+	}
+	public void setView(long view) {
+		this.view = view;
+	}
+	
 }

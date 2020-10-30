@@ -9,6 +9,9 @@ public interface NovelDao {
 	/* 작품 리스트 */
 	public List<NovelVo> novelListAll(NovelVo vo);
 	
+	/* 작품 페이징 */
+	public int novelCnt();
+	
 	/* 랭킹별 작품 리스트 */
 	public List<NovelVo> novelListRanking(NovelVo vo);
 	

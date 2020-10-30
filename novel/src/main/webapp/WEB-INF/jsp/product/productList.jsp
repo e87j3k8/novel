@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" type="text/css" href="/resources/css/product.css">
 <!-- <script src="/resources/js/main.js"></script> -->
 <div class="content">
@@ -41,4 +40,25 @@
 			</c:forEach>
 		</ul>
 	</div>
+	<c:if test="${ last gt 1 }">
+	<div class="page">
+		<ul>
+			<c:if test="${ page gt view }">
+			<li class="arrowBtn">
+				<a href="/products/all?page=${ start-1 }">&lt;</a>
+			</li>
+			</c:if>
+			<c:forEach var="i" begin="${ start }" end="${ end }">
+			<li>
+				<a href="/products/all?page=${ i }">${ i }</a>
+			</li>
+			</c:forEach>
+			<c:if test="${ end lt last }">
+			<li class="arrowBtn">
+				<a href="/products/all?page=${ end+1 }">&gt;</a>
+			</li>
+			</c:if>
+		</ul>
+	</div>
+	</c:if>
 </div>

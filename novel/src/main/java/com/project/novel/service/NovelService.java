@@ -9,6 +9,9 @@ public interface NovelService {
 	/* 전체 작품 리스트 */
 	public List<NovelVo> novelList(NovelVo vo);
 	
+	/* 페이징 작품 수 */
+	public int novelCnt();
+	
 	/* 랭킹별 작품 리스트 */
 	public List<NovelVo> novelListRanking(NovelVo vo);
 	

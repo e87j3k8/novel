@@ -2,6 +2,28 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="novel">
+	<!-- 메인화면 랭킹 -->
+	<select id="novel.rankingTop" parameterClass="hashMap" resultClass="novelVo">
+		select
+			tn.id as novelId,
+			title as title,
+			ifnull(sum(a.view),0) as `viewAll`
+		from tb_novel tn
+		inner join tb_items ti on tn.id=ti.novelId
+		left join (
+			select
+				tv.itemId,
+				count(tv.itemId) as `view`
+			from tb_view tv
+			group by itemId
+		) a on ti.id = a.itemId
+		group by tn.id
+		order by `viewAll` desc,tn.id
+		<isNotEmpty property="rank">
+		limit #rank#
+		</isNotEmpty>
+	</select>
+	
 	<!-- 작품 목록 -->
 	<select id="novel.getProductList" resultClass="novelVo">
 		select
@@ -34,24 +56,10 @@
 		</isNotEmpty>
 	</select>
 	
-	<select id="novel.rankingTop" parameterClass="hashMap" resultClass="novelVo">
-		select
-			tn.id as novelId,
-			title as title,
-			ifnull(sum(a.view),0) as `viewAll`
-		from tb_novel tn
-		inner join tb_items ti on tn.id=ti.novelId
-		left join (
-			select
-				tv.itemId,
-				count(tv.itemId) as `view`
-			from tb_view tv
-			group by itemId
-		) a on ti.id = a.itemId
-		group by tn.id
-		order by `viewAll` desc,tn.id
-		<isNotEmpty property="rank">
-		limit #rank#
-		</isNotEmpty>
+	<!-- 페이징을 위한 작품 수 -->
+	<select id="novel.countAll" resultClass="int">
+	select
+		count(tn.id)
+	from tb_novel tn
 	</select>
 </sqlMap>

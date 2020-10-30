@@ -20,6 +20,11 @@ public class NovelServiceImpl implements NovelService {
 	}
 	
 	@Override
+	public int novelCnt() {
+		return novelDao.novelCnt();
+	}
+	
+	@Override
 	public List<NovelVo> novelListRanking(NovelVo vo) {
 		// TODO Auto-generated method stub
 		return null;

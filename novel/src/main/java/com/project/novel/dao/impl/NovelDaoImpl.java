@@ -20,6 +20,11 @@ public class NovelDaoImpl implements NovelDao {
 	}
 	
 	@Override
+	public int novelCnt() {
+		return (int)sqlMapClientTemplate.queryForObject("novel.countAll");
+	}
+	
+	@Override
 	public List<NovelVo> novelListRanking(NovelVo vo) {
 		// TODO Auto-generated method stub
 		return null;

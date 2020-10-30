@@ -4,12 +4,12 @@
 <sqlMap namespace="items">
 	<select id="items.getItemList" parameterClass="itemsVo" resultClass="itemsVo">
 	select
-		ti.id as novelId,
-		tn.title as title,
+		tn.id as novelId,
 		ti.id as itemId,
+		tn.title as title,
 		ti.subtitle as subtitle,
-		a.`view`,
-		date_format(ti.regDt,'%Y/%m/%d %h:%i')  as regDate
+		a.`view` as `view`,
+		date_format(ti.regDt,'%Y/%m/%d %h:%i') as regDate
 	from tb_novel tn
 	inner join tb_items ti on tn.id = ti.novelId
 	left join
