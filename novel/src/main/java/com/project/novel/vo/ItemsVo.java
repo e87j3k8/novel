@@ -1,6 +1,5 @@
 package com.project.novel.vo;
 
-import java.util.Date;
 
 public class ItemsVo extends NovelVo {
 	private long itemId;
@@ -38,5 +37,6 @@ public class ItemsVo extends NovelVo {
 	public void setView(long view) {
 		this.view = view;
 	}
+	
 	
 }

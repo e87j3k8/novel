@@ -6,21 +6,55 @@
 	select
 		tn.id as novelId,
 		ti.id as itemId,
-		tn.title as title,
 		ti.subtitle as subtitle,
-		a.`view` as `view`,
-		date_format(ti.regDt,'%Y/%m/%d %h:%i') as regDate
+		ifnull(a.cnt,0) as `view`,
+		date_format(ti.regDt,'%Y/%m/%d') as regDate
 	from tb_novel tn
 	inner join tb_items ti on tn.id = ti.novelId
 	left join
 	(
 		select
 			itemId as itemId,
-			count(id) as `view`
+			count(id) as cnt
 		from tb_view
 		group by itemId
 	) a
 	on ti.id = a.itemId
 	where tn.id = #novelId#
+	order by itemId
 	</select>
+	
+	<select id="items.getItem" parameterClass="long" resultClass="itemsVo">
+	select
+		ti.id as itemId,
+		ti.novelId as novelId,
+		ti.subtitle as subtitle,
+		ti.content as content,
+		date_format(ti.regDt,'%Y/%m/%d') as regDt
+	from tb_items ti
+	where ti.id =#itemId#
+	</select>
+	
+	<select id="items.isView" parameterClass="hashMap" resultClass="int">
+	select
+		ifnull(count(tv.userBy),0)
+	from tb_view tv
+	where userBy =#userBy#
+	and itemId =#itemId#
+	</select>
+	
+	
+	<update id="items.insertView" parameterClass="hashMap">
+	insert into tb_view(
+		itemId,
+		userBy,
+		Dt
+	)
+	values(
+		#itemId#,
+		#userBy#,
+		now()
+	)
+	</update>
+	
 </sqlMap>

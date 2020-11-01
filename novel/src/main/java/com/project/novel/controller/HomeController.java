@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.novel.service.UserService;
@@ -35,11 +34,7 @@ public class HomeController {
 	
 	@RequestMapping(value = { "", "/", "/index" })
 	public ModelAndView index(HttpServletResponse response, HttpServletRequest request) throws Exception {
-		String pageUrl = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 		ModelAndView mav = new ModelAndView();
-		UserVo vo = new UserVo();
-		vo.setId(1);
-		vo = userService.getUser(vo);
 		
 		mav.setViewName("/index.bs");
 		return mav;
@@ -55,6 +50,21 @@ public class HomeController {
 		res.setCode(200);
 		res.setData(list);
 		return res;
+	}
+	
+	@RequestMapping(value = "/login", method=RequestMethod.GET)
+	public void doLogin(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		UserVo vo = new UserVo();
+		vo.setId(1);
+		vo = userService.getUser(vo);
+		request.getSession().setAttribute("user", vo);
+		response.sendRedirect("/");
+	}
+	
+	@RequestMapping(value = "/logout", method=RequestMethod.GET)
+	public void doLogOut(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		request.getSession().removeAttribute("user");
+		response.sendRedirect("/");
 	}
 	
 }

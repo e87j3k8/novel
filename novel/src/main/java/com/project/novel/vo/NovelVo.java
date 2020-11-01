@@ -1,6 +1,7 @@
 package com.project.novel.vo;
 
 public class NovelVo {
+	private static final int VIEWPAGE = 5; 
 	private long novelId;
 	private long authorId;
 	private String authorNm;
@@ -88,6 +89,9 @@ public class NovelVo {
 	}
 	public void setNew(boolean isNew) {
 		this.isNew = isNew;
+	}
+	public int getVIEWPAGE() {
+		return VIEWPAGE;
 	}
 	
 }

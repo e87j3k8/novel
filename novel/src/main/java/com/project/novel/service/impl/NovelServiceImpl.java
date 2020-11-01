@@ -1,5 +1,6 @@
 package com.project.novel.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,6 +21,10 @@ public class NovelServiceImpl implements NovelService {
 	}
 	
 	@Override
+	public NovelVo viewNovel(NovelVo vo) {
+		return novelDao.viewNovel(vo);
+	}
+	@Override
 	public int novelCnt() {
 		return novelDao.novelCnt();
 	}
@@ -28,6 +33,21 @@ public class NovelServiceImpl implements NovelService {
 	public List<NovelVo> novelListRanking(NovelVo vo) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public ArrayList<Long> getRecommendStatus(HashMap<String, Long> map) {
+		return novelDao.getRecommendStatus(map);
+	}
+	
+	@Override
+	public HashMap<String, Integer> getRecommend(Long novelId) {
+		return novelDao.getRecommend(novelId);
+	}
+	
+	@Override
+	public int insertRecommend(HashMap<String, Object> map) {
+		return novelDao.insertRecommend(map);
 	}
 	
 	@Override

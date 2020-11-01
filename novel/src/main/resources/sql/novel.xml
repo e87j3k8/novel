@@ -2,28 +2,6 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="novel">
-	<!-- 메인화면 랭킹 -->
-	<select id="novel.rankingTop" parameterClass="hashMap" resultClass="novelVo">
-		select
-			tn.id as novelId,
-			title as title,
-			ifnull(sum(a.view),0) as `viewAll`
-		from tb_novel tn
-		inner join tb_items ti on tn.id=ti.novelId
-		left join (
-			select
-				tv.itemId,
-				count(tv.itemId) as `view`
-			from tb_view tv
-			group by itemId
-		) a on ti.id = a.itemId
-		group by tn.id
-		order by `viewAll` desc,tn.id
-		<isNotEmpty property="rank">
-		limit #rank#
-		</isNotEmpty>
-	</select>
-	
 	<!-- 작품 목록 -->
 	<select id="novel.getProductList" resultClass="novelVo">
 		select
@@ -52,7 +30,44 @@
 		group by tn.id
 		order by ti.regDt desc
 		<isNotEmpty property="page">
-		limit #page#, 5
+		limit #page#, #VIEWPAGE#
+		</isNotEmpty>
+	</select>
+	
+	<!-- 작품 조회 -->
+	<select id="novel.getProduct" parameterClass="novelVo" resultClass="novelVo">
+		select
+			tn.id as novelId,
+			tu.nick as authorNm,
+			tn.title as title,
+			(select tg.genreNm from tb_genrecode tg where tg.id=tn.genre1) as genre,
+			ifnull((select tg.genreNm from tb_genrecode tg where tg.id=tn.genre2),'') as genre2,
+			ifnull((select count(id) from tb_recommend tr where tr.novelId = tn.id and tr.status = 0),0) as `like`,
+			ifnull((select count(*) from tb_recommend tr2 where tr2.novelId = tn.id and tr2.status =1) ,0) as dislike
+		from tb_novel tn
+		inner join tb_user tu on tn.author = tu.id
+		where tn.id =#novelId#
+	</select>
+	
+	<!-- 메인화면 랭킹 -->
+	<select id="novel.rankingTop" parameterClass="hashMap" resultClass="novelVo">
+		select
+			tn.id as novelId,
+			title as title,
+			ifnull(sum(a.view),0) as `viewAll`
+		from tb_novel tn
+		inner join tb_items ti on tn.id=ti.novelId
+		left join (
+			select
+				tv.itemId,
+				count(tv.itemId) as `view`
+			from tb_view tv
+			group by itemId
+		) a on ti.id = a.itemId
+		group by tn.id
+		order by `viewAll` desc,tn.id
+		<isNotEmpty property="rank">
+		limit #rank#
 		</isNotEmpty>
 	</select>
 	
@@ -62,4 +77,28 @@
 		count(tn.id)
 	from tb_novel tn
 	</select>
+	
+	<select id="novel.isRecommend" parameterClass="hashMap" resultClass="long">
+		select
+			id
+		from tb_recommend tr
+		where tr.userBy = #userBy# and tr.novelId = #novelId#;
+	</select>
+	
+	<select id="novel.getRecommend" parameterClass="long" resultClass="hashMap">
+	select
+		ifnull(case when status=0 then count(id) end,0) as `like`,
+		ifnull(case when status=1 then count(id) end,0) as dislike
+	 from tb_recommend tr where novelId =#novelId#
+	</select>
+	
+	<update id="novel.insertRecommend" parameterClass="hashMap">
+		insert into tb_recommend(novelId, status, userBy) values(#novelId#, #status#, #userBy#)
+	</update>
+	
+	<update id="novel.cancelRecommend" parameterClass="hashMap">
+		update
+			tb_recommend tr
+		set tr.status = #status# where tr.id = #id#
+	</update>
 </sqlMap>

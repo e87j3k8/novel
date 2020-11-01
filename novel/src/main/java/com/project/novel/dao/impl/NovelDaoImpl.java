@@ -1,5 +1,6 @@
 package com.project.novel.dao.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,6 +21,11 @@ public class NovelDaoImpl implements NovelDao {
 	}
 	
 	@Override
+	public NovelVo viewNovel(NovelVo vo) {
+		return (NovelVo)sqlMapClientTemplate.queryForObject("novel.getProduct",vo);
+	}
+	
+	@Override
 	public int novelCnt() {
 		return (int)sqlMapClientTemplate.queryForObject("novel.countAll");
 	}
@@ -28,6 +34,21 @@ public class NovelDaoImpl implements NovelDao {
 	public List<NovelVo> novelListRanking(NovelVo vo) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public ArrayList<Long> getRecommendStatus(HashMap<String, Long> map) {
+		return (ArrayList<Long>)sqlMapClientTemplate.queryForList("novel.isRecommend",map);
+	}
+	
+	@Override
+	public HashMap<String, Integer> getRecommend(Long novelId) {
+		return (HashMap<String, Integer>)sqlMapClientTemplate.queryForObject("novel.getRecommend", novelId);
+	}
+	
+	@Override
+	public int insertRecommend(HashMap<String, Object> map) {
+		return (int)sqlMapClientTemplate.update("novel.insertRecommend", map);
 	}
 	
 	@Override
