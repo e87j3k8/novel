@@ -43,7 +43,6 @@
 	and itemId =#itemId#
 	</select>
 	
-	
 	<update id="items.insertView" parameterClass="hashMap">
 	insert into tb_view(
 		itemId,
