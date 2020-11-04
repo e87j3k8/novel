@@ -59,15 +59,15 @@
 				</a>
 			</li>
 			<li>
-				<a href="/products/genre">
+				<a href="/products/genre/1">
 					<span>작품장르별</span>
 				</a>
 			</li>
-			<li>
+			<%-- <li>
 				<a href="/products/ranking">
 					<span>작품랭킹별</span>
 				</a>
-			</li>
+			</li> --%>
 		</ul>
 	</div>
 </header>

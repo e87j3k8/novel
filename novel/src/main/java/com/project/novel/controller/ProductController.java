@@ -3,6 +3,7 @@ package com.project.novel.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.project.novel.service.impl.ItemServiceImpl;
 import com.project.novel.service.impl.NovelServiceImpl;
+import com.project.novel.vo.GenreVo;
 import com.project.novel.vo.ItemsVo;
 import com.project.novel.vo.NovelVo;
 import com.project.novel.vo.ResponseVo;
@@ -38,14 +39,13 @@ public class ProductController {
 	
 	@RequestMapping(value="/all", method = RequestMethod.GET)
 	public ModelAndView productAll(@RequestParam(defaultValue="1",value="page") int page, HttpServletResponse response, HttpServletRequest request) throws Exception {
-		String pageUrl = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 		if(page<1) {
 			return new ModelAndView(new RedirectView("/products/all?page=1"));
 		}
 		ModelAndView mav = new ModelAndView();
 		NovelVo vo = new NovelVo();
 		try {
-			int total = novelService.novelCnt();
+			int total = novelService.novelCnt(0);
 			/* total=44; */
 			int viewpage = vo.getVIEWPAGE();
 			int last = (int)Math.ceil((double)total/(double)viewpage);
@@ -66,6 +66,38 @@ public class ProductController {
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
+		mav.setViewName("/product/productList.bs");
+		return mav;
+	}
+	
+	@RequestMapping(value="/genre/{genreId:[\\d]+}", method = RequestMethod.GET)
+	public ModelAndView productGenre(@PathVariable int genreId, @RequestParam(defaultValue="1",value="page") int page, HttpServletResponse response, HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		NovelVo vo = new NovelVo();
+		List<GenreVo> genreList = novelService.getAllGenre();
+		boolean isGenre=false;;
+		for(GenreVo gvo : genreList) {
+			if(gvo.getGenreId()==genreId) {
+				isGenre=true;
+			}
+		}
+		int total = novelService.novelCnt(genreId);
+		int viewpage = vo.getVIEWPAGE();
+		int last = (int)Math.ceil((double)total/(double)viewpage);
+		int start = (page%viewpage)==0?(int)Math.ceil((page-1)/viewpage)*viewpage+1:(int)Math.ceil(page/viewpage)*viewpage+1;
+		int end = start+viewpage-1>last?last:start+viewpage-1;
+		if(!isGenre || page<1 || last<page) {
+			return new ModelAndView(new RedirectView("/products/genre/1?page=1"));
+		}
+		mav.addObject("start", start);
+		mav.addObject("end", end);
+		mav.addObject("last", last);
+		mav.addObject("view", viewpage);
+		mav.addObject("page", page);
+		mav.addObject("genreList",genreList);
+		vo.setPage(page);
+		vo.setGenreCode(genreId);
+		mav.addObject("list", novelService.novelList(vo));
 		mav.setViewName("/product/productList.bs");
 		return mav;
 	}

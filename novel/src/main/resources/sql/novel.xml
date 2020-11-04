@@ -27,6 +27,9 @@
 		) a
 		on ti.id = a.itemId
 		where 1=1
+		<isNotEqual prepend="and" property="genreCode" compareValue="0">
+		tn.genre1 =#genreCode# or tn.genre2 =#genreCode#
+		</isNotEqual>
 		group by tn.id
 		order by ti.regDt desc
 		<isNotEmpty property="page">
@@ -47,6 +50,13 @@
 		from tb_novel tn
 		inner join tb_user tu on tn.author = tu.id
 		where tn.id =#novelId#
+	</select>
+		
+	<select id="novel.getGenre" resultClass="genreVo">
+		select
+			id as genreId,
+			genreNm as genreNm
+		from tb_genrecode
 	</select>
 	
 	<!-- 메인화면 랭킹 -->
@@ -72,17 +82,20 @@
 	</select>
 	
 	<!-- 페이징을 위한 작품 수 -->
-	<select id="novel.countAll" resultClass="int">
+	<select id="novel.countAll" parameterClass="int" resultClass="int">
 	select
 		count(tn.id)
 	from tb_novel tn
+	<isNotEqual compareValue="0">
+	where (tn.genre1 =#genreCode# or tn.genre2 =#genreCode#)
+	</isNotEqual>
 	</select>
 	
 	<select id="novel.isRecommend" parameterClass="hashMap" resultClass="long">
 		select
 			id
 		from tb_recommend tr
-		where tr.userBy = #userBy# and tr.novelId = #novelId#;
+		where tr.userBy = #userBy# and tr.novelId = #novelId#
 	</select>
 	
 	<select id="novel.getRecommend" parameterClass="long" resultClass="hashMap">

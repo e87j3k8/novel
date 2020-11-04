@@ -9,6 +9,7 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.project.novel.dao.NovelDao;
+import com.project.novel.vo.GenreVo;
 import com.project.novel.vo.NovelVo;
 
 @Repository("novelDao")
@@ -26,8 +27,13 @@ public class NovelDaoImpl implements NovelDao {
 	}
 	
 	@Override
-	public int novelCnt() {
-		return (int)sqlMapClientTemplate.queryForObject("novel.countAll");
+	public List<GenreVo> getAllGenre() {
+		return (List<GenreVo>)sqlMapClientTemplate.queryForList("novel.getGenre");
+	}
+	
+	@Override
+	public int novelCnt(int genreCode) {
+		return (int)sqlMapClientTemplate.queryForObject("novel.countAll", genreCode);
 	}
 	
 	@Override

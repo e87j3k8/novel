@@ -28,6 +28,7 @@
 		<typeAlias alias="userVo" type="com.project.novel.vo.UserVo" />
 		<typeAlias alias="itemsVo" type="com.project.novel.vo.ItemsVo" />
 		<typeAlias alias="novelVo" type="com.project.novel.vo.NovelVo" />
+		<typeAlias alias="genreVo" type="com.project.novel.vo.GenreVo" />
 		
 		<sqlMap resource="/sql/user.xml" />
 		<sqlMap resource="/sql/novel.xml" />

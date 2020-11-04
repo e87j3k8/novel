@@ -8,6 +8,7 @@ public class NovelVo {
 	private String title;
 	private String genre;
 	private String genre2;
+	private int genreCode;
 	private long like;
 	private long dislike;
 	private long viewAll;
@@ -59,6 +60,12 @@ public class NovelVo {
 	}
 	public void setGenre2(String genre2) {
 		this.genre2 = genre2;
+	}
+	public int getGenreCode() {
+		return genreCode;
+	}
+	public void setGenreCode(int genreCode) {
+		this.genreCode = genreCode;
 	}
 	public long getLike() {
 		return like;

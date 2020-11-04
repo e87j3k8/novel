@@ -2,6 +2,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" type="text/css" href="/resources/css/product.css">
 <div class="content">
+	<c:if test="${ not empty genreList }">
+	<div class="genreNav">
+		<ul>
+			<c:forEach var="genre" items="${ genreList }">
+			<li>
+				<a href="/products/genre/${genre.genreId }">
+					<span>${ genre.genreNm }</span>
+				</a>
+			</li>
+			</c:forEach>
+		</ul>
+	</div>
+	</c:if>
 	<div class="productList">
 		<ul>
 			<c:forEach items="${ list }" var="list">

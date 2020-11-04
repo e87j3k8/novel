@@ -11,21 +11,10 @@
 		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
 	</definition>
 	
-	<!-- 빈페이지 -->
-	<definition name=".blank" template="/WEB-INF/tiles/blank.jsp">
-		<put-attribute name="body" value="" />
-	</definition>
-	
 	<definition name="/*.bs" extends=".base">
 		<put-attribute name="body" value="/WEB-INF/jsp/{1}.jsp" />
 	</definition>
 	<definition name="/**/*.bs" extends=".base">
-		<put-attribute name="body" value="/WEB-INF/jsp/{1}/{2}.jsp" />
-	</definition>
-	<definition name="/*.blank" extends=".blank">
-		<put-attribute name="body" value="/WEB-INF/jsp/{1}.jsp" />
-	</definition>
-	<definition name="/**/*.blank" extends=".blank">
 		<put-attribute name="body" value="/WEB-INF/jsp/{1}/{2}.jsp" />
 	</definition>
 </tiles-definitions>

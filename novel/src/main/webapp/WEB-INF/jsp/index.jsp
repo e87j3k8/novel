@@ -8,7 +8,7 @@
 	<div id="rankingTop" class="rankingTop">
 	</div>
 </div>
-<div class="handleBars" id="rankingTopTemplate">
+<template id="rankingTopTemplate">
 	<h2>랭킹TOP5</h2>
 	<ul>
 		{{#each data}}
@@ -23,4 +23,4 @@
 		</li>
 		{{/each}}
 	</ul>
-</div>
+</template>

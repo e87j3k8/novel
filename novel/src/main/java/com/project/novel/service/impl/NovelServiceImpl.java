@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.novel.dao.impl.NovelDaoImpl;
 import com.project.novel.service.NovelService;
+import com.project.novel.vo.GenreVo;
 import com.project.novel.vo.NovelVo;
 
 @Service("novelService")
@@ -24,9 +25,15 @@ public class NovelServiceImpl implements NovelService {
 	public NovelVo viewNovel(NovelVo vo) {
 		return novelDao.viewNovel(vo);
 	}
+	
 	@Override
-	public int novelCnt() {
-		return novelDao.novelCnt();
+	public List<GenreVo> getAllGenre() {
+		return novelDao.getAllGenre();
+	}
+	
+	@Override
+	public int novelCnt(int genreCode) {
+		return novelDao.novelCnt(genreCode);
 	}
 	
 	@Override

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.project.novel.vo.GenreVo;
 import com.project.novel.vo.NovelVo;
 
 public interface NovelDao {
@@ -13,8 +14,11 @@ public interface NovelDao {
 	/* 작품 정보 조회 */
 	public NovelVo viewNovel(NovelVo vo);
 	
+	/* 장르 목록 가져오기 */
+	public List<GenreVo> getAllGenre();
+	
 	/* 작품 페이징 */
-	public int novelCnt();
+	public int novelCnt(int genreCode);
 	
 	/* 랭킹별 작품 리스트 */
 	public List<NovelVo> novelListRanking(NovelVo vo);
