@@ -48,7 +48,7 @@ body {min-width:1000px;}
 #header h1 {float:left; margin-top:25px; }
 #header .totalSearchArea {float:left; margin-top:25px; margin-left:70px; height:50px;}
 #header .totalSearchArea input {vertical-align:middle;}
-#header .totalSearchArea .inputText {width:250px; height:31px; line-height:31px; padding-left:16px; border:none; background:url('//cdn.joara.com/images/common/bg/bg_input_text.gif') no-repeat left top;}
+#header .totalSearchArea .inputText {width:250px; height:31px; line-height:31px; padding-left:16px; border:none; background:url('') no-repeat left top;}
 #header .totalSearchArea .srch_history {margin:5px 0 0 20px; padding:2px 0 0 20px; background:url('//cdn.joara.com/images/common/bul/bul_srchhistory.gif') no-repeat left 2px;}
 #header .totalSearchArea .srch_history a {display:inline-block; margin-right:6px; font-size:11px; color:#8a8a8a; letter-spacing:-1px;}
 
